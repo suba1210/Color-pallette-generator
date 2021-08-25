@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/createstyle.css">
+
+
+</head>
+
+<body>
+    
+    
+    <div class='pallete'>
+
+        <div class='column' >
+
+            <div class='color'></div>
+            <div class='button'>—</div>
+
+        </div>
+
+        <div class='column'>
+
+            <div class='color'></div>
+            <div class='button'>—</div>
+
+        </div>
+
+        <div class='column' >
+
+            <div class='color'></div>
+            <div class='button'>—</div>
+
+        </div>
+
+        <div class='column'>
+
+            <div class='color'></div>
+            <div class='button'>—</div>
+
+        </div>
+
+        <div class='column' >
+
+            <div class='color'></div>
+            <div class='button'>—</div>
+
+        </div>
+
+
+    </div>
+
+    <br><br>
+
+    <button id='addButton'>ADD COLOR</button>
+
+    <br><br>
+
+    <button id='saveButton'>Save</button>
+
+</body>
+
+<script>
+
+let colorSelect = document.querySelectorAll('.color');
+let background=[];
+let buttons = document.querySelectorAll('.button');
+let addButtonSelect = document.getElementById('addButton');
+let palleteSelect = document.querySelector('.pallete');
+
+
+function randomGeneartor(){
+    return '#'+Math.floor(Math.random()*16777215).toString(16);
+}
+
+colorSelect.forEach((color)=>{
+    let randomColor = Math.floor(Math.random()*16777215).toString(16);
+    color.style.backgroundColor = "#" + randomColor;
+})
+
+
+buttons.forEach((button)=>{
+    button.addEventListener('click',()=>{
+        button.parentNode.parentNode.removeChild(button.parentNode);
+        checkCount();
+        checkColumns()
+    })
+})
+
+
+addButtonSelect.addEventListener('click',()=>{
+    let a = document.createElement("div");
+    a.className="column";
+    palleteSelect.appendChild(a);
+
+    let b = document.createElement("div");
+    b.className = 'color';
+    b.style.backgroundColor = randomGeneartor();
+    a.appendChild(b);
+
+    let c = document.createElement("div");
+    c.className = 'button';
+    let txt=document.createTextNode('—');
+    c.appendChild(txt);
+    a.appendChild(c);
+    c.addEventListener('click',()=>{
+        c.parentNode.parentNode.removeChild(c.parentNode);
+        checkCount();
+        checkColumns()
+    })
+
+    checkCount();
+    checkColumns();
+})
+
+
+
+function checkCount(){
+    if(document.querySelectorAll('.column').length<=2)
+    {
+        document.querySelectorAll('.button').forEach((button)=>{
+            button.style.display='none';
+        })
+    }
+    else{
+        document.querySelectorAll('.button').forEach((button)=>{
+            button.style.display='flex';
+        })
+    }
+    return;
+}
+
+
+function checkColumns(){
+
+    if(document.querySelectorAll('.column').length>=8){
+        addButtonSelect.style.display = 'none';
+    }
+    else{
+        addButtonSelect.style.display = 'block';
+    }
+    return;
+
+}
+
+
+
+// const saveButton = document.getElementById('saveButton');
+
+// saveButton.addEventListener('click',function(){
+    
+// })
+
+
+
+
+
+
+
+
+
+
+</script>
