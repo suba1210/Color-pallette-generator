@@ -11,6 +11,9 @@
 </head>
 
 <body>
+    <% let username = currentUser.username %> 
+
+    <% let id = currentUser._id %> 
     
     
     <div class='pallete'>
@@ -64,6 +67,15 @@
 </body>
 
 <script>
+
+
+let username = '<%-username%>';
+let id = '<%-id%>';
+
+localStorage.setItem('username',`${username}`);
+localStorage.setItem('id',`${id}`);
+
+
 
 let colorSelect = document.querySelectorAll('.color');
 let background=[];
@@ -155,21 +167,6 @@ function checkColumns(){
 
 const saveButton = document.getElementById('saveButton');
 
-// $('#saveButton').on('click',function(){
-//     let xhr = new XMLHttpRequest();
-//     let data = {
-//         param1 : "suba",
-//         param2 : "sri"
-//     };
-
-//     xhr.open('POST',"http://localhost:3000/data", true);
-//     xhr.onload = function(data){
-//         console.log('loaded',this.responseText);
-//     };
-//     xhr.setRequestHeader('Content-Type','application/json');
-//     xhr.send(JSON.stringify(data));
-
-// })
 
 function send () {
     let sendingColors = [];
@@ -178,12 +175,19 @@ function send () {
         sendingColors.push(color.style.backgroundColor);
     })
 
-    console.log(sendingColors);
+    let userId = localStorage.getItem('id');
+    console.log(userId);
+
+    const data = {
+        colors : sendingColors,
+        owner : userId
+    }
+    console.log(data);
 
     var xhr = new window.XMLHttpRequest()
     xhr.open('POST', "http://localhost:3000/data" , true)
     xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8')
-    xhr.send(JSON.stringify(sendingColors));
+    xhr.send(JSON.stringify(data));
     alert("Your Pallete is saved!")
 
 }
