@@ -59,7 +59,7 @@
 
     <br><br>
 
-    <button id='saveButton'>Save</button>
+    <button onclick='send()' id='saveButton'>Save</button>
 
 </body>
 
@@ -73,12 +73,17 @@ let palleteSelect = document.querySelector('.pallete');
 
 
 function randomGeneartor(){
-    return '#'+Math.floor(Math.random()*16777215).toString(16);
+    var letters = '0123456789ABCDEF';
+    var color = '#';
+    for (var i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
 }
 
 colorSelect.forEach((color)=>{
-    let randomColor = Math.floor(Math.random()*16777215).toString(16);
-    color.style.backgroundColor = "#" + randomColor;
+    let randomColor = randomGeneartor();
+    color.style.backgroundColor = randomColor;
 })
 
 
@@ -148,17 +153,40 @@ function checkColumns(){
 
 
 
-// const saveButton = document.getElementById('saveButton');
+const saveButton = document.getElementById('saveButton');
 
-// saveButton.addEventListener('click',function(){
-    
+// $('#saveButton').on('click',function(){
+//     let xhr = new XMLHttpRequest();
+//     let data = {
+//         param1 : "suba",
+//         param2 : "sri"
+//     };
+
+//     xhr.open('POST',"http://localhost:3000/data", true);
+//     xhr.onload = function(data){
+//         console.log('loaded',this.responseText);
+//     };
+//     xhr.setRequestHeader('Content-Type','application/json');
+//     xhr.send(JSON.stringify(data));
+
 // })
 
+function send () {
+    let sendingColors = [];
+    let colorSend = document.querySelectorAll('.color');
+    colorSend.forEach((color)=>{
+        sendingColors.push(color.style.backgroundColor);
+    })
 
+    console.log(sendingColors);
 
+    var xhr = new window.XMLHttpRequest()
+    xhr.open('POST', "http://localhost:3000/data" , true)
+    xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8')
+    xhr.send(JSON.stringify(sendingColors));
+    alert("Your Pallete is saved!")
 
-
-
+}
 
 
 

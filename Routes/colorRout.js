@@ -3,7 +3,7 @@ const router = express.Router();
 
 
 // require Models
-const User = require('../models/colorModel');
+const Color = require('../models/colorModel');
 
 
 router.get('/color/create',async(req,res)=>{
