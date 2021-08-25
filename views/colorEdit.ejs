@@ -5,18 +5,90 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="/css/createstyle.css">
-
-
 </head>
 
+<style>
+
+.pallete{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.column{
+    display: flex;
+    flex-direction: column;
+    margin : 15px;
+    justify-content: center;
+    align-items: center;
+}
+
+.color{
+
+    width:90px;
+    height: 360px;
+    border:2px solid black ;
+    position: relative;
+    border-radius:8px;
+
+}
+
+.button{
+    width:30px;
+    height:30px;
+    border-radius: 50%;
+    background-color: bisque;
+    margin-top: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bolder;
+    cursor : pointer;
+}
+
+body {
+    margin: 0;
+    padding : 0;
+    min-height: 100vh;
+    background-color:rgb(255,240,245);
+}
+.header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    max-width: 1000px;
+    width:90%;
+    align-items: center;
+    margin :0 auto;
+    background-color:rgb(240,248,255);
+    border: 1px solid black;
+}
+.center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.center > *{
+    margin : 10px;
+    background-color:#828afd;
+    color: white;
+    padding:10px 15px;
+    border: none;
+    cursor: pointer;
+    width: fit-content;
+}
+
+
+</style>
+
+
 <body>
-    <% let username = currentUser.username %> 
-    <% let id = currentUser._id %> 
 
     <div class='header'>
 
-        <div><h1 style='margin:20px;color:blueviolet'>Coolors</h1></div>
+        <div><h1 style='margin:20px;color:blueviolet'>Edit your Color Pallette</h1></div>
 
         <div>
 
@@ -33,98 +105,83 @@
 
     </div>
 
-    <p style='font-weight: bolder;color:blueviolet;text-align: center;'>Coolors can generate you color pallettes of length from 2 to 8 !</p>
-    
-    
+
+    <% let allColors = color.colors %> 
+
     <div class='pallete'>
 
-        <div class='column' >
+        <% for(let i=0;i<allColors.length;i++){ %>
+        
+            <div class='column' >
 
-            <div class='color'></div>
-            <div class='button'>—</div>
+                <div class='color'></div>
 
-        </div>
+                <div class='button'>—</div>
+    
+            </div>
 
-        <div class='column'>
 
-            <div class='color'></div>
-            <div class='button'>—</div>
-
-        </div>
-
-        <div class='column' >
-
-            <div class='color'></div>
-            <div class='button'>—</div>
-
-        </div>
-
-        <div class='column'>
-
-            <div class='color'></div>
-            <div class='button'>—</div>
-
-        </div>
-
-        <div class='column' >
-
-            <div class='color'></div>
-            <div class='button'>—</div>
-
-        </div>
+        <% } %> 
 
 
     </div>
 
     <br>
 
-    <div class='center'  >
+    <div class='center'>
 
-    <button id='addButton'>ADD COLOR</button>
-    
-    <button id='randButton'>Generate Random Colors</button>
+        <button id='addButton'>Add Color</button>
 
-    <button onclick='send()' id='saveButton'>SAVE PALLETTE</button>
+        <button id='randButton'>Generate Random Colors</button>
 
-    <br><br>
+        <button onclick='send()' id='saveButton'>Save</button>
+
+        <a style='text-decoration: none;' href='/color/single/<%=color._id%>'>Back to show pallette</a>
 
     </div>
 
-</body>
-
-<script>
-
-
-let username = '<%-username%>';
-let id = '<%-id%>';
-
-localStorage.setItem('username',`${username}`);
-localStorage.setItem('id',`${id}`);
+    
 
 
 
-let colorSelect = document.querySelectorAll('.color');
-let background=[];
-let buttons = document.querySelectorAll('.button');
-let addButtonSelect = document.getElementById('addButton');
-let palleteSelect = document.querySelector('.pallete');
 
 
-function randomGeneartor(){
+
+
+
+
+
+    <script>
+
+        let buttons = document.querySelectorAll('.button');
+        let addButtonSelect = document.getElementById('addButton');
+        let palleteSelect = document.querySelector('.pallete');
+
+        let allColors = '<%-allColors%>';
+
+        let colorSelect = document.querySelectorAll('.color');
+
+        allColors = allColors.split("),");
+
+        for(let i=0;i<allColors.length-1;i++)
+        {
+            allColors[i] = allColors[i] + ')';
+        }
+
+        for(let i=0;i<allColors.length;i++)
+        {
+            colorSelect[i].style.backgroundColor = allColors[i];
+        }
+
+    function randomGeneartor(){
     var letters = '0123456789ABCDEF';
     var color = '#';
     for (var i = 0; i < 6; i++) {
         color += letters[Math.floor(Math.random() * 16)];
     }
     return color;
-}
-
-colorSelect.forEach((color)=>{
-    let randomColor = randomGeneartor();
-    color.style.backgroundColor = randomColor;
-})
-
-
+    }
+        
 buttons.forEach((button)=>{
     button.addEventListener('click',()=>{
         button.parentNode.parentNode.removeChild(button.parentNode);
@@ -159,7 +216,7 @@ addButtonSelect.addEventListener('click',()=>{
     checkColumns();
 })
 
-
+checkCount();
 
 function checkCount(){
     if(document.querySelectorAll('.column').length<=2)
@@ -189,6 +246,7 @@ function checkColumns(){
 
 }
 
+
 let randButtonSelect = document.getElementById('randButton');
 
 
@@ -197,11 +255,14 @@ randButtonSelect.addEventListener('click',()=>{
     let randomColor = randomGeneartor();
     color.style.backgroundColor = randomColor;
 })
-})
-
+})      
 
 
 const saveButton = document.getElementById('saveButton');
+
+let url1 = window.location.href;
+let ind1 = url1.indexOf('edit/');
+let channel1 = url1.substr(ind1+'edit/'.length);
 
 
 function send () {
@@ -211,24 +272,32 @@ function send () {
         sendingColors.push(color.style.backgroundColor);
     })
 
-    let userId = localStorage.getItem('id');
-    console.log(userId);
 
     const data = {
         colors : sendingColors,
-        owner : userId
+        colorId : channel1
     }
     console.log(data);
 
     var xhr = new window.XMLHttpRequest()
-    xhr.open('POST', "http://localhost:3000/data" , true)
+    xhr.open('POST', "http://localhost:3000/dataedit" , true)
     xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8')
     xhr.send(JSON.stringify(data));
-    alert("Your Pallete is saved!")
+    alert("Your Pallete is updated!");
+    location.reload();
 
 }
 
 
 
 
+
+
 </script>
+
+
+
+
+
+</body>
+</html>

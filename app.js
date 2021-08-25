@@ -42,6 +42,7 @@ app.set('views', path.join(__dirname, 'views'))
 
 // app.use(express.urlencoded({ extended: true }));
 // app.use(methodOverride('_method'));
+
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(bodyParser.urlencoded({extended: false}))
@@ -90,6 +91,12 @@ app.post('/data',async(req,res)=>{
     res.end();
 })
 
+app.post('/dataedit',async(req,res)=>{
+    const colorPal = await Color.findById(req.body.colorId);
+    colorPal.colors = req.body.colors;
+    await colorPal.save();
+    res.end();
+})
 
 
 app.get('/',(req,res)=>{

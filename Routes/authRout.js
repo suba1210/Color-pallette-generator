@@ -45,6 +45,20 @@ router.post('/login',passport.authenticate('local',{failureFlash:true,failureRed
 
 
 
+router.get('/logout',async(req,res)=>{
+    try {
+        req.logout();
+        req.flash("success_msg", "Successfully logged out");
+        res.redirect("/login");
+        
+    } catch (err) {
+        req.flash("error_msg", "Unable to logout");
+        res.redirect("/home");
+    }
+})
+
+
+
 
 
 

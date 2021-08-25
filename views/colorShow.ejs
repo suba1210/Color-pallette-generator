@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<style>
+
+.pallete{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.column{
+    display: flex;
+    flex-direction: column;
+    margin : 15px;
+    justify-content: center;
+    align-items: center;
+}
+
+.color{
+
+    width:90px;
+    height: 360px;
+    border:2px solid black ;
+    position: relative;
+    border-radius:8px;
+
+}
+
+body {
+    margin: 0;
+    padding : 0;
+    min-height: 100vh;
+    background-color:rgb(255,240,245);
+}
+.header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    max-width: 1000px;
+    width:90%;
+    align-items: center;
+    margin :0 auto;
+    background-color:rgb(240,248,255);
+    border: 1px solid black;
+}
+.center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+#btn{
+    background-color:#828afd;
+    color: white;
+    padding:10px 15px;
+    border: none;
+    cursor: pointer;
+    width: fit-content;
+
+}
+
+
+
+</style>
+
+
+<body>
+
+    <div class='header'>
+
+        <div><h1 style='margin:20px;color:blueviolet'>Your Color Pallete</h1></div>
+
+        <div>
+
+            
+            <a style='margin:20px;text-decoration: none;font-weight: bolder;color:blueviolet' href='/color/create'>Home</a>
+
+            <a style='margin:20px;text-decoration: none;font-weight: bolder;color:blueviolet' href='/user/colors/show/<%=currentUser._id%>'>Your Color Pallettes</a>   
+
+            <a style='margin:20px;text-decoration: none;font-weight: bolder;color:blueviolet' href='/logout'>Logout</a>
+
+
+        </div>
+
+
+    </div>
+    
+    <br><br>
+
+    <% let allColors = color.colors %> 
+
+    <div class='pallete'>
+
+        <% for(let i=0;i<allColors.length;i++){ %>
+        
+            <div class='column' >
+
+                <div class='color'></div>
+    
+            </div>
+
+
+        <% } %> 
+
+
+    </div>
+
+
+    <br><br>
+    
+    <div class='center' >
+        <a style='text-decoration: none;' href='/color/single/edit/<%=color._id%>'><span id='btn'>Edit Color Pallette</span></a>
+    </div>
+
+
+    <script>
+
+        let allColors = '<%-allColors%>';
+
+        let colorSelect = document.querySelectorAll('.color');
+
+        allColors = allColors.split("),");
+
+        for(let i=0;i<allColors.length-1;i++)
+        {
+            allColors[i] = allColors[i] + ')';
+        }
+
+        for(let i=0;i<allColors.length;i++)
+        {
+            colorSelect[i].style.backgroundColor = allColors[i];
+        }
+
+    </script>
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+<body>
+
+<style>
+
+table{
+    max-width: fit-content;
+    width:100%;
+    margin:0 auto;
+}
+
+table, th, td {
+  border: 2px solid black;
+  border-collapse: collapse;
+}
+th,td{
+    padding:20px;
+    text-align: center;
+}
+body {
+    margin: 0;
+    padding : 0;
+    min-height: 100vh;
+    background-color:rgb(255,240,245);
+}
+.header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    max-width: 1000px;
+    width:90%;
+    align-items: center;
+    margin :0 auto;
+    background-color:rgb(240,248,255);
+    border: 1px solid black;
+}
+
+
+</style>
+
+
+    
+
+
+
+    <div class='header'>
+
+        <div><h1 style='margin:20px;color:blueviolet'>Coolors</h1></div>
+
+        <div>
+
+            <a style='margin:20px;text-decoration: none;font-weight: bolder;color:blueviolet' href='/color/create'>Home</a>
+
+            <a style='margin:20px;text-decoration: none;font-weight: bolder;color:blueviolet' href='/user/colors/show/<%=currentUser._id%>'>Your Color Pallettes</a>   
+
+            <a style='margin:20px;text-decoration: none;font-weight: bolder;color:blueviolet' href='/logout'>Logout</a>
+
+        </div>
+
+
+    </div>
+
+    <br><br>
+
+    <p style='font-weight: bolder;color:blueviolet;text-align: center;'> Save color palletes to show here !</p>
+
+
+    <br><br>
+
+    <%  colorPalletes =  user.colors  %>
+
+            
+
+    <% if(user.colors.length!=0){ %>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Pallette</th>
+                    <th>Created At</th>
+                    <th>Updated At</th>
+                    <th>Show Palletes</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr>
+
+                    <% for(let i=0;i<colorPalletes.length;i++){ %>
+
+                        <tr>
+                            <td> Palletes <%=i+1%> </td>
+
+                            <td><%=colorPalletes[i].createdAt.toLocaleDateString()%> at <%=colorPalletes[i].createdAt.toLocaleTimeString()%> </td>
+
+                            <td><%=colorPalletes[i].updatedAt.toLocaleDateString()%> at <%=colorPalletes[i].updatedAt.toLocaleTimeString()%> </td>
+
+                            <td><a href='/color/single/<%=colorPalletes[i]._id%>'> Show </a> </td>
+
+                        </tr>
+
+                    <% } %> 
+
+
+
+
+                </tr>
+            </tbody>
+
+        </table>
+        
+
+
+    <% } else { %>
+        
+
+        
+    <% } %> 
+
+
+</body>
+</html>
