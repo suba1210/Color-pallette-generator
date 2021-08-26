@@ -80,6 +80,10 @@ body {
     width: fit-content;
 }
 
+input{
+    margin:10px;
+}
+
 
 </style>
 
@@ -113,6 +117,8 @@ body {
         <% for(let i=0;i<allColors.length;i++){ %>
         
             <div class='column' >
+
+                <input type='color' id='picker' name='picker' onchange="this.nextElementSibling.style.backgroundColor= this.value ;">
 
                 <div class='color'></div>
 
@@ -195,6 +201,12 @@ addButtonSelect.addEventListener('click',()=>{
     let a = document.createElement("div");
     a.className="column";
     palleteSelect.appendChild(a);
+
+    let i = document.createElement('input');
+    i.setAttribute("type", "color");
+    i.setAttribute("name", "picker");
+    i.onchange = function(){i.nextElementSibling.style.backgroundColor= i.value;}
+    a.appendChild(i);
 
     let b = document.createElement("div");
     b.className = 'color';

@@ -19,7 +19,7 @@ body {
 .column{
     display: flex;
     flex-direction: column;
-    margin : 10px;
+    margin : 15px;
     justify-content: center;
     align-items: center;
 }
@@ -82,4 +82,8 @@ body {
     cursor: pointer;
     width: fit-content;
     font-family: 'Vollkorn', serif;
+}
+
+input{
+    margin:10px;
 }

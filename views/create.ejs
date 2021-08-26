@@ -40,6 +40,8 @@
 
         <div class='column' >
 
+
+            <input type='color' id='picker' name='picker' onchange="this.nextElementSibling.style.backgroundColor= this.value ;">
             <div class='color'></div>
             <div class='button'>—</div>
 
@@ -47,6 +49,7 @@
 
         <div class='column'>
 
+            <input type='color' id='picker' name='picker' onchange="this.nextElementSibling.style.backgroundColor= this.value ;">
             <div class='color'></div>
             <div class='button'>—</div>
 
@@ -54,20 +57,21 @@
 
         <div class='column' >
 
+            <input type='color' id='picker' name='picker' onchange="this.nextElementSibling.style.backgroundColor= this.value ;">
             <div class='color'></div>
             <div class='button'>—</div>
 
         </div>
 
         <div class='column'>
-
+            <input type='color' id='picker' name='picker' onchange="this.nextElementSibling.style.backgroundColor= this.value ;">
             <div class='color'></div>
             <div class='button'>—</div>
 
         </div>
 
         <div class='column' >
-
+            <input type='color' id='picker' name='picker' onchange="this.nextElementSibling.style.backgroundColor= this.value ;">
             <div class='color'></div>
             <div class='button'>—</div>
 
@@ -139,6 +143,12 @@ addButtonSelect.addEventListener('click',()=>{
     a.className="column";
     palleteSelect.appendChild(a);
 
+    let i = document.createElement('input');
+    i.setAttribute("type", "color");
+    i.setAttribute("name", "picker");
+    i.onchange = function(){i.nextElementSibling.style.backgroundColor= i.value;}
+    a.appendChild(i);
+
     let b = document.createElement("div");
     b.className = 'color';
     b.style.backgroundColor = randomGeneartor();
@@ -154,6 +164,8 @@ addButtonSelect.addEventListener('click',()=>{
         checkCount();
         checkColumns()
     })
+
+    
 
     checkCount();
     checkColumns();
