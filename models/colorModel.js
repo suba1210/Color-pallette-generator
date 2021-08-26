@@ -3,6 +3,9 @@ const Schema = mongoose.Schema;
 
 const ColorSchema = new Schema({
 
+    name : {
+        type : String
+    },
     colors : [{
         type : String
     }],

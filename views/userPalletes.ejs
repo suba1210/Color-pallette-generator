@@ -105,7 +105,7 @@ body {
                     <% for(let i=0;i<colorPalletes.length;i++){ %>
 
                         <tr>
-                            <td> Palletes <%=i+1%> </td>
+                            <td><%=colorPalletes[i].name%>  </td>
 
                             <td><%=colorPalletes[i].createdAt.toLocaleDateString()%> at <%=colorPalletes[i].createdAt.toLocaleTimeString()%> </td>
 

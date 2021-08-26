@@ -20,16 +20,16 @@
 
     <div class='header'>
 
-        <div><h1 style='margin:20px;color:blueviolet'>Coolors</h1></div>
+        <div><h1 style='margin:10px;color:blueviolet'>Coolors</h1></div>
 
         <div>
 
             
-            <a style='margin:20px;text-decoration: none;font-weight: bolder;color:blueviolet' href='/color/create'>Home</a>
+            <a style='margin:10px;text-decoration: none;font-weight: bolder;color:blueviolet' href='/color/create'>Home</a>
 
-            <a style='margin:20px;text-decoration: none;font-weight: bolder;color:blueviolet' href='/user/colors/show/<%=currentUser._id%>'>Your Color Pallettes</a>   
+            <a style='margin:10px;text-decoration: none;font-weight: bolder;color:blueviolet' href='/user/colors/show/<%=currentUser._id%>'>Your Color Pallettes</a>   
 
-            <a style='margin:20px;text-decoration: none;font-weight: bolder;color:blueviolet' href='/logout'>Logout</a>
+            <a style='margin:10px;text-decoration: none;font-weight: bolder;color:blueviolet' href='/logout'>Logout</a>
 
 
         </div>
@@ -227,12 +227,21 @@ function send () {
         sendingColors.push(color.style.backgroundColor);
     })
 
+    let Palname = prompt("Give a name to your pallette !");
+
+    for(;Palname == "" && Palname == null;)
+    {
+        Palname = prompt("Give a name to your pallette !"); 
+    }
+    console.log(Palname);
+
     let userId = localStorage.getItem('id');
     console.log(userId);
 
     const data = {
         colors : sendingColors,
-        owner : userId
+        owner : userId,
+        name : Palname
     }
     console.log(data);
 
