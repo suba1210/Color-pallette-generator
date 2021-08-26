@@ -8,6 +8,7 @@ body {
     padding : 0;
     min-height: 100vh;
     background-color:rgb(255,240,245);
+    font-family: 'Vollkorn', serif;
 }
 .pallete{
     display: flex;
