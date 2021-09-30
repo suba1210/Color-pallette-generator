@@ -1,4 +1,5 @@
-# Delta-onsite-task-3
+# Color-pallette-generator
+
 
 Getting Started : 
 
@@ -6,7 +7,7 @@ Getting Started :
 
 2) npm run dev
 
-Random Palette Generator, with local storage to save the palette.
+Random Palette Generator:
 
 - A random palette generator similar to https://coolors.co/320d6d-ffbfb7-ffd447-700353-4c1c00 
 - Implement user auth
